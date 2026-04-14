@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authAPI, chatAPI, paymentAPI, userAPI, automationAPI } from '../services/api';
+import { chatAPI, paymentAPI, userAPI, automationAPI } from '../services/api';
 import useThemeStore from '../services/themeStore';
 import { toast } from 'react-toastify';
-import { FiLogOut, FiMessageSquare, FiUser, FiActivity, FiSend, FiInbox, FiCheck, FiX, FiSun, FiMoon } from 'react-icons/fi';
+import { FiLogOut, FiMessageSquare, FiUser, FiActivity, FiSend, FiInbox, FiCheck, FiX } from 'react-icons/fi';
 import UsageChart from '../components/UsageChart';
 import ChatMessage from '../components/ChatMessage';
 import PaymentModal from '../components/PaymentModal';
@@ -183,21 +183,7 @@ const Dashboard = () => {
     }
   };
 
-  const importDummyContacts = async () => {
-    const dummy = { firstName: `Lead ${Math.floor(Math.random() * 1000)}`, phone: `+1${Math.floor(Math.random() * 1000000000)}` };
-    try {
-      await toast.promise(
-        userAPI.addCustomer(dummy).then(() => fetchContacts()),
-        {
-          pending: 'Importing contacts...',
-          success: 'Contacts imported successfully!',
-          error: 'Failed to import contacts'
-        }
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
 
   const fetchAutomations = async () => {
     setLoadingData(true);

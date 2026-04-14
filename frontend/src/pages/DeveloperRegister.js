@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
 import { toast } from 'react-toastify';
-import { Code, User, Mail, Lock, UserPlus } from 'lucide-react';
+import { User, Mail, Lock, UserPlus } from 'lucide-react';
 
 const DeveloperRegister = () => {
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ const DeveloperRegister = () => {
               <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
                 <Lock className='h-5 w-5 text-gray-400' />
               </div>
-              <input type='password' className='crm-input pl-10' placeholder='••••••••'
+              <input type='password' className='crm-input pl-10' placeholder='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'
                 value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} required />
             </div>
           </div>

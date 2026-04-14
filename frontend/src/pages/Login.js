@@ -18,7 +18,7 @@ const Login = () => {
         document.documentElement.classList.add('dark');
       }
     }
-  }, []);
+  }, [isDarkMode]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
