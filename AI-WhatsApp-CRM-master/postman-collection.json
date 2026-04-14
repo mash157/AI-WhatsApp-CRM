@@ -1,0 +1,357 @@
+{
+  "info": {
+    "name": "AI WhatsApp Business Automation CRM",
+    "description": "Complete API collection for the WhatsApp Business Automation CRM",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Developer Login",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/developer-login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"developer@example.com\",\n  \"password\": \"password123\",\n  \"developerCode\": \"DEVELOPER_CODE\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/logout"
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/chat/send",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hello, how are you?\",\n  \"conversationId\": \"conv_123\",\n  \"tone\": \"professional\",\n  \"language\": \"en\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Conversation",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/chat/conv_123"
+          }
+        },
+        {
+          "name": "Get All Conversations",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/chat"
+          }
+        },
+        {
+          "name": "Delete Conversation",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/chat/conv_123"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Create Razorpay Order",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/payment/razorpay/create-order",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan\": \"basic\",\n  \"duration\": \"monthly\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify Razorpay Payment",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/payment/razorpay/verify",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"order_123\",\n  \"paymentId\": \"pay_123\",\n  \"signature\": \"sig_123\",\n  \"plan\": \"basic\",\n  \"duration\": \"monthly\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Stripe Payment Intent",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/payment/stripe/create-intent",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plan\": \"pro\",\n  \"duration\": \"yearly\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Confirm Stripe Payment",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/payment/stripe/confirm",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentIntentId\": \"pi_123\",\n  \"plan\": \"pro\",\n  \"duration\": \"yearly\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Payment History",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/payment/history"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/user/profile"
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/user/profile",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"preferences\": {\n    \"language\": \"en\",\n    \"toneOfVoice\": \"professional\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Usage Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/user/usage"
+          }
+        },
+        {
+          "name": "Get Trial Status",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/user/trial"
+          }
+        },
+        {
+          "name": "Connect WhatsApp",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/user/whatsapp/connect",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneId\": \"1234567890\",\n  \"accessToken\": \"token_here\",\n  \"businessAccountId\": \"business_id\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Customers",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/user/customers?status=active"
+          }
+        },
+        {
+          "name": "Add Customer",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/user/customers/add",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"+919876543210\",\n  \"whatsappPhone\": \"+919876543210\",\n  \"email\": \"customer@example.com\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"tags\": [\"customer\", \"vip\"]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Voice",
+      "item": [
+        {
+          "name": "Process Voice",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/voice/process",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"What is the weather today?\",\n  \"language\": \"en\",\n  \"tone\": \"professional\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Synthesize Speech",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/voice/synthesize",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Hello, how can I help you today?\",\n  \"language\": \"en\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "WhatsApp",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/whatsapp/send",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+919876543210\",\n  \"message\": \"Hello from AI CRM!\",\n  \"type\": \"text\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send Booking Reminder",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/whatsapp/send-booking-reminder",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+919876543210\",\n  \"bookingTitle\": \"Consultation\",\n  \"bookingDate\": \"2024-04-20T10:00:00Z\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send Payment Reminder",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/whatsapp/send-payment-reminder",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phoneNumber\": \"+919876543210\",\n  \"amount\": \"5000\",\n  \"dueDate\": \"2024-04-25\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Automation",
+      "item": [
+        {
+          "name": "Create Automation",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/automation",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"24H Inactivity Follow-up\",\n  \"type\": \"followup\",\n  \"trigger\": {\n    \"event\": \"user_inactive\",\n    \"timeDelay\": {\n      \"value\": 24,\n      \"unit\": \"hours\"\n    }\n  },\n  \"action\": {\n    \"type\": \"send_whatsapp\",\n    \"message\": \"We miss you! Check out our latest offers.\"\n  },\n  \"schedule\": {\n    \"frequency\": \"daily\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Automations",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/automation"
+          }
+        },
+        {
+          "name": "Update Automation",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/automation/automation_id",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Automation\",\n  \"isActive\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Automation",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/automation/automation_id"
+          }
+        },
+        {
+          "name": "Send Follow-up",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/automation/followup/send",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"customer_id\",\n  \"message\": \"Thank you for your interest!\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
