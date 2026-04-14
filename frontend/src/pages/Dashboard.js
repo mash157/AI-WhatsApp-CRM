@@ -265,28 +265,6 @@ const Dashboard = () => {
     }
   };
 
-  const createDummyAutomation = async () => {
-    const payload = {
-      name: `Welcome Sequence ${Math.floor(Math.random() * 100)}`,
-      type: 'followup',
-      trigger: { event: 'message_received' },
-      action: { type: 'send_message', template: 'Hello! Thank you for contacting us. How can we help?' },
-      isActive: true
-    };
-    try {
-      await toast.promise(
-        automationAPI.createAutomation(payload).then(() => fetchAutomations()),
-        {
-          pending: 'Creating automation...',
-          success: 'Automation created successfully!',
-          error: 'Failed to create automation'
-        }
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const handleImportContactSubmit = async (e) => {
     e.preventDefault();
     if (!newContact.firstName.trim() || !newContact.phone.trim()) {
