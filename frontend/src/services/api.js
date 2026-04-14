@@ -1,7 +1,8 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = `${baseURL}${baseURL.endsWith('/api') ? '' : '/api'}`;
 
 // Set up axios instance
 const apiClient = axios.create({
