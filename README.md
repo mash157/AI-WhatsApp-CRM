@@ -457,24 +457,30 @@ TWILIO_AUTH_TOKEN=your_twilio_token
 TWILIO_PHONE_NUMBER=+1234567890
 ```
 
+## 🌐 Live Demo
+
+### Production Deployment
+- **Frontend (Vercel)**: https://ai-whatsapp-crm-1.vercel.app
+- **Backend (Render)**: https://ai-whatsapp-crm-backend.onrender.com
+- **Database**: MongoDB Atlas (Cloud)
+
 ## 📈 Deployment
 
-### Backend (Heroku/Railway)
+### Backend (Render)
 ```bash
-# Create Procfile
-echo "web: node server.js" > Procfile
+# Deploy to Render
+git push origin main
 
-# Deploy
-git push heroku main
+# Set environment variables in Render Dashboard
+# Backend URL: https://ai-whatsapp-crm-backend.onrender.com
 ```
 
-### Frontend (Vercel/Netlify)
+### Frontend (Vercel)
 ```bash
-# Build
-npm run build
-
 # Deploy to Vercel
 vercel deploy --prod
+
+# Frontend URL: https://ai-whatsapp-crm-1.vercel.app
 ```
 
 ## 🐛 Troubleshooting
