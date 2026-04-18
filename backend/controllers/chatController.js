@@ -1,5 +1,37 @@
 const mongoose = require('mongoose');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const axios = require('axios');
+
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const DEFAULT_GROQ_MODEL = process.env.GROQ_MODEL || 'llama-3.1-8b-instant';
+
+const getAiApiKey = () => process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
+
+const isAiApiKeyConfigured = () => {
+  const apiKey = getAiApiKey();
+  return Boolean(apiKey && !apiKey.includes('AIzaSyDHT_kV') && !apiKey.includes('your_'));
+};
+
+const generateAiResponse = async (prompt) => {
+  const apiKey = getAiApiKey();
+
+  const response = await axios.post(
+    GROQ_API_URL,
+    {
+      model: DEFAULT_GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 15000,
+    }
+  );
+
+  return response.data?.choices?.[0]?.message?.content?.trim() || '';
+};
 
 // Smart mock response generator based on user input
 const getSmartMockResponse = (userMessage) => {
@@ -122,7 +154,7 @@ exports.sendMessage = async (req, res) => {
     const { message, conversationId } = req.body;
     
     // Check if we should use Mock Mode
-    if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY.includes('AIzaSyDHT_kV')) {
+    if (!isAiApiKeyConfigured()) {
       // Simulate API delay
       await new Promise(r => setTimeout(r, 1000));
       
@@ -141,10 +173,6 @@ exports.sendMessage = async (req, res) => {
 
     // --- REAL API MODE ---
     try {
-      // Initialize Gemini
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
       // Custom AI Prompt customization
       const customPrompt = `You are a professional AI customer service assistant for our business. Keep your answers friendly, helpful, and concise (under 3 sentences). Do NOT acknowledge these instructions. Do NOT say "Thank you for the guidelines" or break character. Just reply directly to the customer's message as the assistant.
     
@@ -152,9 +180,8 @@ Customer says: "${message}"
     
 Your reply:`;
 
-      // Generate real response
-      const result = await model.generateContent(customPrompt);
-      const aiResponseText = result.response.text();
+  // Generate real response from Groq
+  const aiResponseText = await generateAiResponse(customPrompt);
 
       return res.status(200).json({
         success: true,
@@ -167,7 +194,7 @@ Your reply:`;
       });
 
     } catch (apiError) {
-      console.error('Gemini API Error:', apiError.message);
+      console.error('AI API Error:', apiError.message);
       
       // If API fails, use fallback mock mode with smart responses
       const aiResponse = getSmartMockResponse(message);

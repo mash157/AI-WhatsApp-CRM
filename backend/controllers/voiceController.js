@@ -1,6 +1,31 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const axios = require('axios');
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const DEFAULT_GROQ_MODEL = process.env.GROQ_MODEL || 'llama-3.1-8b-instant';
+
+const getAiApiKey = () => process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
+
+const generateAiResponse = async (prompt) => {
+  const apiKey = getAiApiKey();
+
+  const response = await axios.post(
+    GROQ_API_URL,
+    {
+      model: DEFAULT_GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 15000,
+    }
+  );
+
+  return response.data?.choices?.[0]?.message?.content?.trim() || '';
+};
 
 // Process voice text
 exports.processVoice = async (req, res) => {
@@ -12,10 +37,8 @@ exports.processVoice = async (req, res) => {
       return res.status(400).json({ error: 'Text is required' });
     }
 
-    // Send to Gemini API
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-    const result = await model.generateContent(text);
-    const aiResponse = result.response.text();
+    // Send to AI API
+    const aiResponse = await generateAiResponse(text);
 
     // Update user usage
     req.user.usage.voiceRequests += 1;

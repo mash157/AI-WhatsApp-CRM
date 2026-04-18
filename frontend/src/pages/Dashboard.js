@@ -148,7 +148,7 @@ const Dashboard = () => {
       setMessages(prev => [...prev, reply]);
     } catch (err) {
       toast.error('Failed to send message: ' + (err.response?.data?.error || err.message));
-      setMessages(prev => [...prev, { role: 'assistant', content: '⚠�  Error: The API is currently unreachable. Make sure the backend server and Gemini API key are configured correctly.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: '⚠�  Error: The API is currently unreachable. Make sure the backend server and AI API key are configured correctly.' }]);
     } finally {
       setIsTyping(false);
       setTimeout(() => {

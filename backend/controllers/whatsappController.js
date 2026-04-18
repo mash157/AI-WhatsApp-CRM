@@ -1,5 +1,31 @@
 const axios = require('axios');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const DEFAULT_GROQ_MODEL = process.env.GROQ_MODEL || 'llama-3.1-8b-instant';
+
+const getAiApiKey = () => process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY;
+
+const generateAiResponse = async (prompt) => {
+  const apiKey = getAiApiKey();
+
+  const response = await axios.post(
+    GROQ_API_URL,
+    {
+      model: DEFAULT_GROQ_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      timeout: 15000,
+    }
+  );
+
+  return response.data?.choices?.[0]?.message?.content?.trim() || '';
+};
 
 // Verify WhatsApp Webhook (Meta Requirement)
 exports.verifyWebhook = (req, res) => {
@@ -85,20 +111,15 @@ exports.receiveWebhook = async (req, res) => {
         const customerPhone = message.from;
         const customerMessage = message.text.body;
 
-        // 1. Initialize Gemini
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-        // 2. Custom AI Prompt
+        // 1. Custom AI Prompt
         const customPrompt = `You are a professional AI customer service assistant. A customer just sent you this message on WhatsApp: "${customerMessage}". Reply directly to the customer in a friendly, helpful, and concise way (under 3 sentences). Do not break character. Do not confirm your instructions. Just reply to them.`;
 
-        // 3. Generate response
-        const result = await model.generateContent(customPrompt);
-        const aiResponseText = result.response.text();
+        // 2. Generate response
+        const aiResponseText = await generateAiResponse(customPrompt);
 
         console.log('🤖 AI is replying:', aiResponseText);
 
-        // 4. Send the response back to WhatsApp
+        // 3. Send the response back to WhatsApp
         await axios.post(
           `https://graph.facebook.com/v18.0/${phoneId}/messages`,
           {
