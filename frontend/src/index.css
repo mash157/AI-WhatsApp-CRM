@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Dark mode - white becomes dark, text changes */
+  body.dark {
+    @apply bg-gray-950 text-gray-100;
+  }
+}
+
+@layer components {
+  /* Light mode */
+  .crm-container {
+    @apply min-h-screen bg-white text-gray-900 flex flex-col transition-colors duration-300;
+  }
+
+  .dark .crm-container {
+    @apply bg-gray-950 text-gray-100;
+  }
+
+  .crm-card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm p-6 transition-colors duration-300;
+  }
+
+  .dark .crm-card {
+    @apply bg-gray-900 border-gray-700;
+  }
+
+  .crm-input {
+    @apply w-full border border-gray-300 rounded-md px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 bg-white placeholder-gray-400 transition-colors duration-300;
+  }
+
+  .dark .crm-input {
+    @apply bg-gray-800 border-gray-700 text-gray-100 placeholder-gray-500;
+  }
+
+  .crm-button {
+    @apply bg-emerald-600 text-white px-4 py-2 rounded-md font-medium hover:bg-emerald-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+  }
+
+  .dark .crm-button {
+    @apply focus:ring-offset-gray-950;
+  }
+  
+  .crm-button-outline {
+    @apply bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+
+  .dark .crm-button-outline {
+    @apply bg-gray-800 text-gray-100 border-gray-700 hover:bg-gray-700 focus:ring-offset-gray-950;
+  }
+}
+
+/* Custom scrollbar - light mode */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f4f5; 
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa; 
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+
