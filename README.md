@@ -14,27 +14,71 @@ vercel deploy --prod
 
 # Backend URL: https://ai-whatsapp-crm-backend.onrender.com
 
-🖼️ Screenshots
+## 🛠️ Technology Stack
 
-Authentication
+### Backend
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js"/>
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js"/>
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB"/>
+  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT"/>
+</p>
 
+### Frontend
 
-Dashboard
+<p align="left">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white" alt="React Router"/>
+  <img src="https://img.shields.io/badge/Zustand-443E38?style=for-the-badge&logo=zustand&logoColor=white" alt="Zustand"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios"/>
+</p>
 
+### AI & Communication
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini"/>
+  <img src="https://img.shields.io/badge/WhatsApp_Cloud_API-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Cloud API"/>
+  <img src="https://img.shields.io/badge/Web_Speech_API-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Web Speech API"/>
+</p>
 
-Contacts
+### Payments
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Razorpay-02042B?style=for-the-badge&logo=razorpay&logoColor=white" alt="Razorpay"/>
+  <img src="https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white" alt="Stripe"/>
+</p>
 
+### Tools & Security
 
-Campaigns
+<p align="left">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
+  <img src="https://img.shields.io/badge/bcryptjs-000000?style=for-the-badge" alt="bcryptjs"/>
+  <img src="https://img.shields.io/badge/Helmet-000000?style=for-the-badge" alt="Helmet"/>
+</p>
 
+## 🖼️ Screenshots
 
+### 🔐 Authentication
 
-Subscriptions
+![Authentication](./screenshots/Authentication.png)
 
+### 📊 Dashboard
 
+![Dashboard](./screenshots/Dashboard.png)
+
+### 👥 Contacts
+
+![Contacts](./screenshots/Contacts.png)
+
+### 📢 Campaigns
+
+![Campaigns](./screenshots/Campaigns.png)
+
+### 💳 Subscriptions
+
+![Subscriptions](./screenshots/Subscriptions.png)
 🚀 Features
 
 ✅ Core Features
